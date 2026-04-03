@@ -9,10 +9,12 @@ Reference the **Project-Brief.md** file for full details on design, features, an
 ## Phase 1: Project Setup & Configuration
 
 ### Task 1.1 — Initialize the Next.js Project
+
 - Create a new Next.js project with TypeScript enabled
 - Configure the project for Vercel deployment
 - Set up the project directory structure:
-  ```
+
+  ```text
   /src
     /app          — Next.js App Router pages and layouts
     /components   — Reusable React components
@@ -23,6 +25,7 @@ Reference the **Project-Brief.md** file for full details on design, features, an
   ```
 
 ### Task 1.2 — Install Dependencies
+
 - Install MUI (`@mui/material`, `@mui/icons-material`, `@emotion/react`, `@emotion/styled`)
 - Install Supabase client (`@supabase/supabase-js`)
 - Install charting library (`recharts` — lightweight, React-native, works well with MUI)
@@ -31,6 +34,7 @@ Reference the **Project-Brief.md** file for full details on design, features, an
 - Install Google Font: Inter (via `@fontsource/inter` or Next.js font optimization)
 
 ### Task 1.3 — Configure the MUI Theme
+
 - Create a custom MUI theme file at `/src/styles/theme.ts`
 - Define the light theme using the Project Brief color palette:
   - Primary: `#0D9488`, Secondary: `#475569`, Accent: `#F59E0B`
@@ -42,7 +46,8 @@ Reference the **Project-Brief.md** file for full details on design, features, an
 - Implement a ThemeProvider with a toggle for light/dark mode, persisted via cookie or local state
 
 ### Task 1.4 — Set Up Supabase
-- **Prerequisite:** The developer must create a free Supabase account at https://supabase.com and create a new project. This provides the URL and anon key needed below.
+
+- **Prerequisite:** The developer must create a free Supabase account at <https://supabase.com> and create a new project. This provides the URL and anon key needed below.
 - No authentication or login is required — this is a single-user app during development
 - Configure the Supabase client in `/src/lib/supabase.ts`
 - Add environment variables to `.env.local`:
@@ -55,11 +60,13 @@ Reference the **Project-Brief.md** file for full details on design, features, an
 ## Phase 2: Database Schema & Data Layer
 
 ### Task 2.1 — Create Database Tables
+
 Create the following tables in Supabase:
 
 **`weight_logs`**
+
 | Column       | Type        | Notes                          |
-|--------------|-------------|--------------------------------|
+| ------------ | ----------- | ------------------------------ |
 | id           | uuid (PK)   | Auto-generated                 |
 | date         | date        | Unique — one entry per day     |
 | weight       | decimal     | In user's preferred unit       |
@@ -67,48 +74,53 @@ Create the following tables in Supabase:
 | created_at   | timestamptz | Auto-generated                 |
 
 **`nutrition_logs`**
-| Column       | Type        | Notes                          |
-|--------------|-------------|--------------------------------|
-| id           | uuid (PK)   | Auto-generated                 |
-| date         | date        | Unique — one entry per day     |
-| calories     | integer     | Total daily calories           |
-| protein_g    | decimal     | Grams of protein               |
-| carbs_g      | decimal     | Grams of carbohydrates         |
-| fat_g        | decimal     | Grams of fat                   |
-| created_at   | timestamptz | Auto-generated                 |
+
+| Column     | Type        | Notes                      |
+| ---------- | ----------- | -------------------------- |
+| id         | uuid (PK)   | Auto-generated             |
+| date       | date        | Unique — one entry per day |
+| calories   | integer     | Total daily calories       |
+| protein_g  | decimal     | Grams of protein           |
+| carbs_g    | decimal     | Grams of carbohydrates     |
+| fat_g      | decimal     | Grams of fat               |
+| created_at | timestamptz | Auto-generated             |
 
 **`import_history`**
-| Column        | Type        | Notes                          |
-|---------------|-------------|--------------------------------|
-| id            | uuid (PK)   | Auto-generated                 |
-| source        | text        | "weight_gurus" or "mfp"       |
-| file_name     | text        | Original file name             |
-| records_added | integer     | Number of new records          |
-| records_skipped | integer   | Duplicates or invalid records  |
-| imported_at   | timestamptz | Auto-generated                 |
+
+| Column          | Type        | Notes                         |
+| --------------- | ----------- | ----------------------------- |
+| id              | uuid (PK)   | Auto-generated                |
+| source          | text        | "weight_gurus" or "mfp"       |
+| file_name       | text        | Original file name            |
+| records_added   | integer     | Number of new records         |
+| records_skipped | integer     | Duplicates or invalid records |
+| imported_at     | timestamptz | Auto-generated                |
 
 **`user_settings`**
-| Column            | Type        | Notes                          |
-|-------------------|-------------|--------------------------------|
-| id                | uuid (PK)   | Auto-generated                 |
-| target_weight     | decimal     | Goal weight                    |
-| target_body_fat   | decimal     | Goal body fat % (nullable)     |
-| weekly_loss_rate  | decimal     | Preferred lbs/week             |
-| unit_system       | text        | "imperial" or "metric"         |
-| created_at        | timestamptz | Auto-generated                 |
-| updated_at        | timestamptz | Auto-updated                   |
+
+| Column           | Type        | Notes                      |
+| ---------------- | ----------- | -------------------------- |
+| id               | uuid (PK)   | Auto-generated             |
+| target_weight    | decimal     | Goal weight                |
+| target_body_fat  | decimal     | Goal body fat % (nullable) |
+| weekly_loss_rate | decimal     | Preferred lbs/week         |
+| unit_system      | text        | "imperial" or "metric"     |
+| created_at       | timestamptz | Auto-generated             |
+| updated_at       | timestamptz | Auto-updated               |
 
 **`milestones`**
-| Column       | Type        | Notes                          |
-|--------------|-------------|--------------------------------|
-| id           | uuid (PK)   | Auto-generated                 |
-| title        | text        | e.g., "First 5 lbs lost"      |
-| type         | text        | "auto" or "custom"             |
-| achieved     | boolean     | Default false                  |
-| achieved_at  | date        | Nullable, set when achieved    |
-| created_at   | timestamptz | Auto-generated                 |
+
+| Column      | Type        | Notes                       |
+| ----------- | ----------- | --------------------------- |
+| id          | uuid (PK)   | Auto-generated              |
+| title       | text        | e.g., "First 5 lbs lost"    |
+| type        | text        | "auto" or "custom"          |
+| achieved    | boolean     | Default false               |
+| achieved_at | date        | Nullable, set when achieved |
+| created_at  | timestamptz | Auto-generated              |
 
 ### Task 2.2 — Build Data Access Functions
+
 - Create `/src/lib/database.ts` with typed functions for all CRUD operations
 - Include functions for:
   - Inserting and querying weight logs (with date range filters)
@@ -123,6 +135,7 @@ Create the following tables in Supabase:
 ## Phase 3: CSV Import & Data Processing
 
 ### Task 3.1 — Build CSV Parsers
+
 - Create `/src/lib/parsers/weightGurus.ts`:
   - Parse Weight Gurus CSV format (detect column headers automatically)
   - Extract date, weight, and body fat percentage fields
@@ -135,6 +148,7 @@ Create the following tables in Supabase:
   - Return structured array of `NutritionLog` objects
 
 ### Task 3.2 — Build the Import Processing Pipeline
+
 - Create `/src/lib/importProcessor.ts`:
   - Accept parsed data arrays
   - Check for duplicate dates against existing database records
@@ -144,6 +158,7 @@ Create the following tables in Supabase:
   - Return a summary: records added, records skipped, any errors
 
 ### Task 3.3 — Build the Data Import UI
+
 - Create a Data Import page at `/src/app/import/page.tsx`
 - Implement drag-and-drop file upload area (accept .csv files)
 - Auto-detect whether the file is from Weight Gurus or MFP based on headers
@@ -157,6 +172,7 @@ Create the following tables in Supabase:
 ## Phase 4: Dashboard
 
 ### Task 4.1 — Build the Dashboard Layout
+
 - Create the Dashboard page at `/src/app/page.tsx` (home route)
 - Include a responsive layout with the following card components:
   - Daily Snapshot card (latest weight, body fat, calorie intake)
@@ -166,6 +182,7 @@ Create the following tables in Supabase:
   - Data freshness indicator (last import date, nudge if stale)
 
 ### Task 4.2 — Build the App Shell & Navigation
+
 - Create a persistent sidebar or top navigation with links to all seven sections:
   - Dashboard, Body Composition Trends, Nutrition Overview, Weekly Report, Progress & Milestones, Data Import, Settings
 - Include a dark mode toggle in the navigation bar
@@ -177,6 +194,7 @@ Create the following tables in Supabase:
 ## Phase 5: Body Composition Trends
 
 ### Task 5.1 — Build Trend Calculation Utilities
+
 - Create `/src/lib/analytics/trends.ts`:
   - Simple moving average function (configurable window: 7, 14, 21 days)
   - Rate-of-loss calculator (lbs or kg per week based on trend data)
@@ -184,6 +202,7 @@ Create the following tables in Supabase:
   - Data gap interpolation (handle missing days gracefully)
 
 ### Task 5.2 — Build the Trends Page
+
 - Create the Body Composition Trends page at `/src/app/trends/page.tsx`
 - Implement interactive charts using Recharts:
   - Weight trend line with raw data points and smoothed moving average overlay
@@ -197,6 +216,7 @@ Create the following tables in Supabase:
 ## Phase 6: Nutrition Overview
 
 ### Task 6.1 — Build Nutrition Analytics
+
 - Create `/src/lib/analytics/nutrition.ts`:
   - Weekly average calorie calculation
   - Weekly average macro breakdown (protein, carbs, fat)
@@ -204,6 +224,7 @@ Create the following tables in Supabase:
   - Calorie-weight correlation: compare weekly avg calories to weekly avg weight change
 
 ### Task 6.2 — Build the Nutrition Page
+
 - Create the Nutrition Overview page at `/src/app/nutrition/page.tsx`
 - Implement charts:
   - Weekly average calorie trend line
@@ -217,6 +238,7 @@ Create the following tables in Supabase:
 ## Phase 7: Progress & Milestones
 
 ### Task 7.1 — Build Milestone Logic
+
 - Create `/src/lib/analytics/milestones.ts`:
   - Auto-detection functions for common milestones:
     - Weight loss thresholds (every 5 lbs)
@@ -226,6 +248,7 @@ Create the following tables in Supabase:
   - Run milestone checks after each data import
 
 ### Task 7.2 — Build the Progress Page
+
 - Create the Progress & Milestones page at `/src/app/progress/page.tsx`
 - Implement:
   - Milestone list (achieved and upcoming) with celebration styling using the accent color
@@ -239,6 +262,7 @@ Create the following tables in Supabase:
 ## Phase 8: Settings & Goals
 
 ### Task 8.1 — Build the Settings Page
+
 - Create the Settings page at `/src/app/settings/page.tsx`
 - Implement a form with:
   - Target weight input
@@ -254,6 +278,7 @@ Create the following tables in Supabase:
 ## Phase 9: Weekly Summary Report
 
 ### Task 9.1 — Build the Weekly Report Generator
+
 - Create `/src/lib/analytics/weeklyReport.ts`:
   - Calculate the past 7 days' averages for weight, body fat, calories, and macros
   - Determine trend direction and rate of change
@@ -261,6 +286,7 @@ Create the following tables in Supabase:
   - Generate a single "key insight" string (e.g., "Your average intake dropped 200 cal/day and your trend is down 1.1 lbs")
 
 ### Task 9.2 — Build the Weekly Report Page
+
 - Create the Weekly Report page at `/src/app/weekly-report/page.tsx`
 - Display the current week's report with:
   - Average weight, body fat, calories, and macro breakdown
@@ -275,22 +301,26 @@ Create the following tables in Supabase:
 ## Phase 10: Polish & Deployment
 
 ### Task 10.1 — Responsive Design Pass
+
 - Test and refine all pages for mobile, tablet, and desktop breakpoints
 - Ensure charts resize and remain readable on small screens
 - Verify dark mode renders correctly across all components
 
 ### Task 10.2 — Error Handling & Edge Cases
+
 - Handle empty states gracefully on every page — show a friendly "No data yet" message with a clear call-to-action directing the user to the Data Import page
 - Add error boundaries for chart rendering failures
 - Validate all form inputs with helpful error messages
 - Handle CSV parsing errors with user-friendly feedback
 
 ### Task 10.3 — Performance Optimization
+
 - Implement data fetching with appropriate caching (SWR or React Query)
 - Lazy load chart components to reduce initial bundle size
 - Optimize Supabase queries (add indexes on date columns)
 
 ### Task 10.4 — Deploy to Vercel
+
 - Connect the GitHub repository to Vercel
 - Configure environment variables in Vercel dashboard (Supabase URL and key)
 - Run a production build and verify deployment

@@ -24,31 +24,39 @@ Intermediate fitness trackers who are already logging food and body weight consi
 ## App Sections
 
 ### 1. Dashboard
+
 The home screen providing a single-glance summary: today's weight/body fat reading, calorie status from the latest MFP import, trend direction (up/down/flat), and progress toward the user's goal.
 
 ### 2. Body Composition Trends
+
 Smoothed trend lines (7-day moving average, adjustable) for weight and body fat percentage over selectable time ranges (7 days, 30 days, 90 days, all-time). Includes rate-of-loss calculations and projected goal completion dates.
 
 ### 3. Nutrition Overview
+
 Processes MFP export data to show calorie and macro trends over time. Focuses on weekly averages and week-over-week changes rather than individual daily logs, and correlates intake patterns with weight trend data.
 
 ### 4. Progress & Milestones
+
 Dedicated motivation section featuring milestone tracking (auto-detected and user-defined), a visual progress timeline, streak counters for data import consistency, and a personal records board (lowest weight, lowest body fat %, best weekly average, longest streak).
 
 ### 5. Data Import
+
 Drag-and-drop upload area for Weight Gurus CSVs and MFP exports. Includes auto-detection of file format, data validation, duplicate/gap detection, import history log, and confirmation summaries.
 
 ### 6. Settings & Goals
+
 User configuration for target weight, target body fat percentage, preferred rate of loss, units (lbs/kg), and date format preferences.
 
 ## Features & Functionality
 
 ### Objective 1 — Effortless, Consistent Tracking
+
 - CSV Import & Sync: drag-and-drop upload with auto-detection, validation, and confirmation
 - Import History & Data Health: log of imports, record counts, gap detection, and gentle nudges for stale data
 - Daily Snapshot: auto-assembled "today" card combining latest weight/body fat and nutrition data
 
 ### Objective 2 — Personalized, Actionable Insight
+
 - Smoothed Trend Lines: moving average filters (7-day default) for weight and body fat
 - Rate-of-Loss Calculator: weekly rate of loss with dynamic goal completion projection
 - Calorie-Weight Correlation: weekly average calorie intake plotted against weight trend
@@ -56,6 +64,7 @@ User configuration for target weight, target body fat percentage, preferred rate
 - Deficit Estimator: TDEE estimation derived from actual intake and weight change data over time
 
 ### Objective 3 — Sustained Motivation & Visible Progress
+
 - Milestone Tracker: auto-detected and user-defined milestones with celebration moments
 - Progress Timeline: visual journey view from start to present with key milestones marked
 - Streak Counter: consecutive days with weight and nutrition data imported
@@ -63,29 +72,31 @@ User configuration for target weight, target body fat percentage, preferred rate
 
 ## Tech Stack
 
-| Layer        | Technology                  | Notes                                      |
-|--------------|-----------------------------|--------------------------------------------|
-| Framework    | Next.js + React             | Hosted on Vercel (free tier)               |
-| UI Library   | MUI (Material UI)           | Material Design components, built-in dark mode |
-| Database     | Supabase (PostgreSQL)       | Free tier — 500MB storage, REST API, JS client |
-| Hosting      | Vercel                      | Free tier, zero-config Next.js deployment  |
-| Font         | Inter (Google Fonts)        | Weights: 400, 500, 700                     |
+| Layer      | Technology            | Notes                                          |
+| ---------- | --------------------- | ---------------------------------------------- |
+| Framework  | Next.js + React       | Hosted on Vercel (free tier)                   |
+| UI Library | MUI (Material UI)     | Material Design components, built-in dark mode |
+| Database   | Supabase (PostgreSQL) | Free tier — 500MB storage, REST API, JS client |
+| Hosting    | Vercel                | Free tier, zero-config Next.js deployment      |
+| Font       | Inter (Google Fonts)  | Weights: 400, 500, 700                         |
 
 ## Design System
 
 ### Light Theme
-| Role       | Color   | Hex       |
-|------------|---------|-----------|
-| Primary    | Deep Teal    | `#0D9488` |
+
+| Role       | Color           | Hex       |
+| ---------- | --------------- | --------- |
+| Primary    | Deep Teal       | `#0D9488` |
 | Secondary  | Slate Blue-Gray | `#475569` |
-| Accent     | Amber        | `#F59E0B` |
-| Background | Off-White    | `#F8FAFC` |
-| Cards      | White        | `#FFFFFF` |
-| Borders    | Light Gray   | `#E2E8F0` |
+| Accent     | Amber           | `#F59E0B` |
+| Background | Off-White       | `#F8FAFC` |
+| Cards      | White           | `#FFFFFF` |
+| Borders    | Light Gray      | `#E2E8F0` |
 
 ### Dark Theme
-| Role       | Color   | Hex       |
-|------------|---------|-----------|
+
+| Role       | Color        | Hex       |
+| ---------- | ------------ | --------- |
 | Primary    | Light Teal   | `#2DD4BF` |
 | Secondary  | Cool Gray    | `#94A3B8` |
 | Accent     | Light Amber  | `#FBBF24` |

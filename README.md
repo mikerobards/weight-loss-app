@@ -14,12 +14,12 @@ A web app that imports MyFitnessPal and Weight Gurus CSV exports and turns them 
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
+| Layer     | Technology                           |
+| --------- | ------------------------------------ |
 | Framework | Next.js 16, React 19, TypeScript 5.9 |
-| UI | Material UI 7, Emotion, Recharts |
-| Database | Supabase (PostgreSQL) |
-| Hosting | Vercel |
+| UI        | Material UI 7, Emotion, Recharts     |
+| Database  | Supabase (PostgreSQL)                |
+| Hosting   | Vercel                               |
 
 ## Getting Started
 
@@ -31,6 +31,7 @@ A web app that imports MyFitnessPal and Weight Gurus CSV exports and turns them 
 ### Setup
 
 1. Clone the repo and install dependencies:
+
    ```bash
    git clone <repo-url>
    cd weight-loss-app
@@ -38,7 +39,8 @@ A web app that imports MyFitnessPal and Weight Gurus CSV exports and turns them 
    ```
 
 2. Create `.env.local` with your Supabase credentials:
-   ```
+
+   ```bash
    NEXT_PUBLIC_SUPABASE_URL=<your-supabase-url>
    NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-anon-key>
    ```
@@ -47,23 +49,25 @@ A web app that imports MyFitnessPal and Weight Gurus CSV exports and turns them 
    - Open `src/lib/migrations/001_initial_schema.sql` and execute it in your Supabase project's SQL editor
 
 4. Start the dev server:
+
    ```bash
    npm run dev
    ```
+
    Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build |
-| `npm start` | Run production server |
-| `npm run lint` | Run ESLint |
+| Command         | Description              |
+| --------------- | ------------------------ |
+| `npm run dev`   | Start development server |
+| `npm run build` | Production build         |
+| `npm start`     | Run production server    |
+| `npm run lint`  | Run ESLint               |
 
 ## Project Structure
 
-```
+```text
 src/
   app/            Pages (Dashboard, Import, Trends, Nutrition, Weekly Report, Progress, Settings)
   components/     AppNav, ThemeRegistry, EmptyState
